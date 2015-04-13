@@ -85,10 +85,7 @@ var iTable = new Class({
     this.container.setStyle('width', '100%');
     /** Barra de Herramientas **/
     if (this.options.buttons) {
-      var tDiv = new Element('div').addClass('tDiv').setStyles({
-        'width': '100%',
-        'height': 25 + (Browser.ie ? 2 : 0)
-      }).inject(this.container);
+      var tDiv = new Element('div').addClass('tDiv').setStyles({'width': '100%', 'height': 25 + (Browser.ie ? 2 : 0)}).inject(this.container);
       var bt = this.options.buttons;
       for (var i = 0; i < bt.length; i++) {
         var fBt = new Element('div').inject(tDiv);
@@ -114,26 +111,17 @@ var iTable = new Class({
       }
     }
     /** Encabezado **/
-    var hDiv = new Element('div', {
-      'class': 'hDiv',
-      'styles': {'width': '100%'}
-    }).inject(this.container);
+    var hDiv = new Element('div', {'class': 'hDiv', 'styles': {'width': '100%'}}).inject(this.container);
     var hDivBox = new Element('div').addClass('hDivBox').inject(hDiv);
     this.sumWidth = 0;
-    this.visibleColumns = 0; // razlikuje se od columnCount jer podaci za neke kolone su ocitani ali se ne prikazuju, npr. bitno kod li width
+    this.visibleColumns = 0;
     for (var c = 0; c < columnCount; c++) {
       var columnModel = this.options.columnModel[c];
-
       var div = new Element('div');
-// ******************************************
-// ****** default postavke columnModela *****
-      if (columnModel.width == null)
+      if (columnModel.width == null) {
         this.options.columnModel[c].width = 100;
+      }
       columnModel.sort = 'ASC';
-// ******************************************
-
-
-// ********************** Header events **************************
       if (this.options.sortHeader) {
         div.addEvent('click', this.clickHeaderColumn.bind(this));
       }
@@ -300,7 +288,7 @@ var iTable = new Class({
     var height = 15;
     var html = data[colmod.dataIndex];
     td.innerHTML = "";
-    var input = new Element('input', {style: "width:" + width + "px;height:" + height + "px;", maxlength: 254, value: html});
+    var input = new Element('input', {style: "width:" + width + "px; height:" + height + "px;", maxlength: 254, value: html});
     input.addClass('inline');
     input.addEvent("keyup", this.finishEditing.bind(this));
     input.addEvent("blur", this.finishEditing.bind(this));
@@ -664,21 +652,16 @@ var iTable = new Class({
       var currentindex = li.retrieve('row');
       var selectedNum = this.selected.length;
       var dontselect = false;
-
       if ((!evt.control && !evt.shift && !evt.meta) || !this.options.multipleSelection) {
-        // ocisti stari selection
         this.elements.each(function (el, i) {
           el.removeClass('selected')
         }, this);
-
-        //for (var i=0; i<this.selected.length; i++) this.elements[ this.selected[i] ].removeClass('selected');
-
         this.selected = new Array();
       }
 
       if (evt.control || evt.meta) {
         for (var i = 0; i < selectedNum; i++) {
-          if (currentindex == this.selected[i]) // ako je vec selektiran unselectaj ga
+          if (currentindex == this.selected[i])
           {
             this.elements[currentindex].removeClass('selected');
             this.selected.splice(i, 1);
