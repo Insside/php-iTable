@@ -42,7 +42,6 @@ class iTable {
   var $botones;
   var $url;
   var $perPageOptions = array(25, 50, 100, 200, 400, 800, 1600, 3200);
-  var $perPage;
   var $page;
   var $pagination;
   var $serverSort;
